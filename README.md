@@ -152,8 +152,7 @@ POST /api/v1/auth/login
 ```
 
 ## Screenshots
-
-Add UI or API screenshots here. Example captures (placeholders included):
+![Tester](screenshots/login.png)
 
 ![Login screenshot](screenshots/login.svg)
 
