@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="36" y="48" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#111">API Requests — Example</text>
+  <rect x="36" y="72" width="920" height="320" rx="8" fill="#fbfdff" stroke="#e6eef9"/>
+  <g font-family="monospace" font-size="13" fill="#0b1220">
+    <text x="56" y="108">GET /api/v1/users/me  — 200 OK</text>
+    <text x="56" y="132">Authorization: Bearer eyJ... (access token)</text>
+    <text x="56" y="164">POST /api/v1/auth/refresh  — 200 OK</text>
+    <text x="56" y="188">Body: { refresh_token: "eyJ..." }</text>
+    <text x="56" y="220">Rate limit: 12/100 (window)</text>
+  </g>
+  <text x="56" y="320" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#6a737d">(Placeholder screenshot for API requests / responses)</text>
+</svg>

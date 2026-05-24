@@ -153,10 +153,11 @@ POST /api/v1/auth/login
 
 ## Screenshots
 
-Add UI or API screenshots here. Example placeholders:
+Add UI or API screenshots here. Example captures (placeholders included):
 
-- ./screenshots/login.png
-- ./screenshots/requests.png
+![Login screenshot](screenshots/login.svg)
+
+![API requests screenshot](screenshots/requests.svg)
 
 ## Learning outcomes / Concepts learned
 
@@ -177,9 +178,3 @@ Add UI or API screenshots here. Example placeholders:
 
 ---
 
-If you'd like, I can also:
-
-- add CI workflow, or
-- generate a README image banner or real screenshots
-
-File: [README.md](README.md)
