@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth API Tester</title>
+    <style>
+        :root {
+            --bg: #f4f7fb;
+            --panel: #ffffff;
+            --text: #152033;
+            --muted: #60708a;
+            --line: #d9e1ec;
+            --accent: #155eef;
+            --ok: #16a34a;
+            --err: #c2415a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(180deg, #eef4ff, var(--bg));
+            color: var(--text);
+        }
+
+        .app {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 28px 18px 44px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 18px 40px rgba(21, 32, 51, 0.08);
+        }
+
+        .grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .toolbar {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            font: inherit;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        form {
+            display: grid;
+            gap: 12px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        button {
+            border: 0;
+            border-radius: 12px;
+            padding: 11px 14px;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--accent);
+            color: white;
+        }
+
+        button.secondary { background: #e7eefb; color: var(--text); }
+        button.ghost { background: #eef8f8; color: #0b6668; }
+
+        .small { color: var(--muted); font-size: 0.92rem; }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: #9aa8bb;
+        }
+
+        .dot.ok { background: var(--ok); }
+        .dot.err { background: var(--err); }
+
+        pre {
+            margin: 0;
+            min-height: 220px;
+            padding: 16px;
+            border-radius: 16px;
+            background: #0f172a;
+            color: #d6e4ff;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+    <main class="app">
+        <header>
+            <h1>Auth API Tester</h1>
+            <p class="small">Minimal browser client for your FastAPI auth routes. It keeps the base URL editable, stores the access token locally, and shows the raw JSON response after every request.</p>
+        </header>
+
+        <section class="card toolbar">
+            <div>
+                <label for="api-base-url">API base URL</label>
+                <input id="api-base-url" type="url" value="http://127.0.0.1:8000" spellcheck="false">
+            </div>
+            <div class="small">Use the same browser session so refresh cookies stay available.</div>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <h2>Sign Up</h2>
+                <p class="small">POST /auth/signup</p>
+                <form id="signup-form">
+                    <div>
+                        <label for="signup-username">Username</label>
+                        <input type="text" id="signup-username" name="username" required minlength="3">
+                    </div>
+                    <div>
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" name="password" required minlength="6">
+                    </div>
+                    <button type="submit">Sign Up</button>
+                </form>
+            </article>
+
+            <article class="card">
+                <h2>Login</h2>
+                <p class="small">POST /auth/login</p>
+                <form id="login-form">
+                    <div>
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required minlength="6">
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+            </article>
+
+            <article class="card">
+                <h2>Profile</h2>
+                <p class="small">GET /users/me and POST /auth/refresh</p>
+                <div class="actions">
+                    <button id="view-profile" type="button">View Profile</button>
+                    <button id="refresh-token" type="button" class="ghost">Refresh Session</button>
+                    <button id="clear-token" type="button" class="secondary">Clear Token</button>
+                    <button id="logout" type="button" class="secondary">Logout</button>
+                </div>
+                <p class="small">Current token: <span id="token-state">not saved</span></p>
+            </article>
+        </section>
+
+        <section class="card" style="margin-top: 16px;">
+            <h2>Response Console</h2>
+            <div class="status" id="request-status"><span class="dot"></span><span>Idle</span></div>
+            <pre id="output">Ready.</pre>
+        </section>
+    </main>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>
