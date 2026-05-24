@@ -19,14 +19,13 @@ Simple multi-service architecture: API service, Postgres, Redis, optional admin 
 
 ```mermaid
 graph LR
-  Browser -->|HTTPS| API[FastAPI (uvicorn)]
-  API --> DB[(Postgres)]
+  Browser -->|HTTPS| API[FastAPI]
+  API --> Postgres[(Postgres)]
   API --> Redis[(Redis)]
-  subgraph infra
-    DB
+  subgraph Infrastructure
+    Postgres
     Redis
   end
-  note right of API: JWT auth, refresh rotation, rate limit
 ```
 
 ## Features
